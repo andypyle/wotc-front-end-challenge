@@ -34,7 +34,8 @@ export const useTalentStore = create<TalentStore>((set) => ({
   selectTalent: (talent: Talent) =>
     set((state: TalentStore) => {
       // Only select a talent if we have points available.
-      return state.selectedTalents.length < state.maxSelectedTalents
+      return state.selectedTalents.length < state.maxSelectedTalents &&
+        !state.selectedTalents.map((t) => t.id).includes(talent.id)
         ? { selectedTalents: [...state.selectedTalents, talent] }
         : {}
     }),
