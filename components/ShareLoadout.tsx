@@ -1,3 +1,4 @@
+import { lato } from '@/pages'
 import { useTalentStore } from '@/stores/talents'
 import styled from '@emotion/styled'
 import { useState } from 'react'
@@ -67,7 +68,15 @@ const ShareLoadoutButtons = styled.div`
   }
 `
 
-const ShareLoadoutTextarea = styled.textarea`
+const ShareLoadoutTextareaWithError = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+`
+type ShareLoadoutTextareaProps = {
+  error?: string
+}
+const ShareLoadoutTextarea = styled.textarea<ShareLoadoutTextareaProps>`
   min-height: 100px;
   background-color: var(--lighter-gray);
   color: #eee;
@@ -75,15 +84,29 @@ const ShareLoadoutTextarea = styled.textarea`
   border: 0;
   padding: 0.75rem;
 
+  ${({ error }) => error?.length && 'border: 1px solid red;'}
+
   @media only screen and (min-width: 999px) {
     width: 100%;
   }
 `
+type ErrorTextProps = {
+  error?: string
+}
+const ErrorText = styled.div<ErrorTextProps>`
+  font-size: 1rem;
+  color: red;
+  text-align: right;
+  margin-top: 0.5rem;
+  height: 16px;
+`
 
 export const ShareLoadout = () => {
   const [importedLoadoutString, setImportedLoadoutString] = useState<string>('')
+  const [importError, setImportError] = useState('')
   const [value, copy] = useCopyToClipboard()
-  const { selectedTalents, resetTalents, importTalents } = useTalentStore()
+  const { selectedTalents, importTalents, maxSelectedTalents } =
+    useTalentStore()
 
   const onClickShareLoadout = () => {
     copy(selectedTalents.map((t) => t.id).join(','))
@@ -91,32 +114,56 @@ export const ShareLoadout = () => {
 
   const onChangeImportLoadoutString = (
     e: React.ChangeEvent<HTMLTextAreaElement>
-  ) => setImportedLoadoutString(e.target.value)
+  ) => {
+    setImportedLoadoutString(e.target.value)
+    if (importError.length) {
+      setImportError('')
+    }
+  }
 
   const onClickImportLoadout = () => {
     if (importedLoadoutString.length) {
-      importTalents(importedLoadoutString.split(',').map(Number))
-      setImportedLoadoutString('')
+      const importedLoadoutArray = Array.from(
+        new Set(importedLoadoutString.split(','))
+      ).map(Number)
+
+      // Can't import it if it's moe than the talent points available.
+      if (importedLoadoutArray.length <= maxSelectedTalents) {
+        importTalents(importedLoadoutArray)
+        setImportError('')
+        setImportedLoadoutString('')
+      } else {
+        setImportError(
+          'Too many talents imported. You may only import up to 6.'
+        )
+      }
     }
   }
 
   return (
-    <ShareLoadoutStyled>
-      <ShareLoadoutButtons>
-        <ImportLoadoutButton onClick={onClickImportLoadout}>
-          Import
-        </ImportLoadoutButton>
-        <ShareLoadoutButton
-          onClick={onClickShareLoadout}
-          disabled={!selectedTalents.length}
-          value={value as string}>
-          {value ? 'Copied!' : 'Copy'}
-        </ShareLoadoutButton>
-      </ShareLoadoutButtons>
-      <ShareLoadoutTextarea
-        onChange={onChangeImportLoadoutString}
-        value={importedLoadoutString}
-      />
-    </ShareLoadoutStyled>
+    <>
+      <ShareLoadoutStyled className={lato.className}>
+        <ShareLoadoutButtons>
+          <ImportLoadoutButton onClick={onClickImportLoadout}>
+            Import
+          </ImportLoadoutButton>
+          <ShareLoadoutButton
+            onClick={onClickShareLoadout}
+            disabled={!selectedTalents.length}
+            value={value as string}>
+            {value ? 'Copied!' : 'Copy'}
+          </ShareLoadoutButton>
+        </ShareLoadoutButtons>
+        <ShareLoadoutTextareaWithError>
+          <ShareLoadoutTextarea
+            onChange={onChangeImportLoadoutString}
+            error={importError}
+            placeholder="Paste up to 6 talent IDs, separated by commas."
+            value={importedLoadoutString}
+          />
+          <ErrorText>{importError}</ErrorText>
+        </ShareLoadoutTextareaWithError>
+      </ShareLoadoutStyled>
+    </>
   )
 }

@@ -12,7 +12,7 @@ import { Lato } from 'next/font/google'
 import Head from 'next/head'
 import { useEffect } from 'react'
 
-const lato = Lato({ style: 'normal', weight: '400', subsets: ['latin'] })
+export const lato = Lato({ style: 'normal', weight: '400', subsets: ['latin'] })
 
 export default function Home() {
   const {
