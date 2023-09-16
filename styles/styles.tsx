@@ -6,10 +6,14 @@ export const globalStyles = (
     styles={css`
       :root {
         --blue: #6a9dd3;
+        --blue-ish: #3c91e6;
+        --lighter-blue-ish: #5da3ea;
         --dark-gray: #0c0e0f;
         --gray: #1b1c1e;
         --lighter-gray: #303133;
         --gradient-disabled: #4a4a4a;
+        --green: #5cad7e;
+        --lighter-green: #6ab489;
       }
 
       body {
