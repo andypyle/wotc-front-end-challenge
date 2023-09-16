@@ -1,7 +1,15 @@
-import { Inter } from 'next/font/google'
+import {
+  Container,
+  PointsRemaining,
+  Talent,
+  TalentButton,
+  TalentPath,
+  TalentPathName,
+} from '@/components'
+import { Lato } from 'next/font/google'
 import Head from 'next/head'
 
-const inter = Inter({ subsets: ['latin'] })
+const lato = Lato({ style: 'normal', weight: '400', subsets: ['latin'] })
 
 export default function Home() {
   return (
@@ -14,7 +22,42 @@ export default function Home() {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <main className={inter.className}>Hello, Wizards!</main>
+      <Container className={lato.className}>
+        <div>
+          <TalentPath>
+            <TalentPathName>NAME</TalentPathName>
+            <Talent>
+              <TalentButton>1</TalentButton>
+            </Talent>
+            <Talent>
+              <TalentButton>2</TalentButton>
+            </Talent>
+            <Talent>
+              <TalentButton>3</TalentButton>
+            </Talent>
+            <Talent>
+              <TalentButton>4</TalentButton>
+            </Talent>
+          </TalentPath>
+
+          <TalentPath>
+            <TalentPathName>NAME</TalentPathName>
+            <Talent>
+              <TalentButton>1</TalentButton>
+            </Talent>
+            <Talent>
+              <TalentButton>2</TalentButton>
+            </Talent>
+            <Talent>
+              <TalentButton>3</TalentButton>
+            </Talent>
+            <Talent>
+              <TalentButton>4</TalentButton>
+            </Talent>
+          </TalentPath>
+        </div>
+        <PointsRemaining>3/6 Points Remaining</PointsRemaining>
+      </Container>
     </>
   )
 }
