@@ -3,6 +3,7 @@ import {
   Heading,
   PointsSpent,
   PointsSpentText,
+  ShareLoadout,
   TalentPath,
   TalentPaths,
 } from '@/components'
@@ -60,6 +61,7 @@ export default function Home() {
           <PointsSpentText>Points Spent</PointsSpentText>
         </PointsSpent>
       </Container>
+      <ShareLoadout />
     </>
   )
 }

@@ -13,6 +13,7 @@ export const PointsSpent = styled.div`
 
   @media only screen and (min-width: 999px) {
     margin: 0;
+    align-self: center;
   }
 `
 

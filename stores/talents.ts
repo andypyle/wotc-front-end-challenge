@@ -1,23 +1,35 @@
+import { arrayToObj } from '@/helpers'
 import type { Talent, TalentTree } from '@/pages/api/talents'
 import { create } from 'zustand'
 
 type TalentStore = {
   talentsData: TalentTree
+  talentsDataObject: { [key: string]: Talent }
   selectTalent: (talent: Talent) => void
   unselectTalent: (talent: Talent) => void
   selectedTalents: Talent[]
   loading: boolean
+  importTalents: (talents: number[]) => void
+  resetTalents: () => void
   fetchTalents: () => void
   maxSelectedTalents: number
 }
 
 export const useTalentStore = create<TalentStore>((set) => ({
   talentsData: {},
+  talentsDataObject: {},
   loading: false,
   fetchTalents: async () => {
     set({ loading: true })
     const response = await fetch('/api/talents')
-    set({ talentsData: await response.json(), loading: false })
+    const data = await response.json()
+    const flatData = Object.values(data).flat()
+    console.log(Object.values(data).flat())
+    set({
+      talentsData: data,
+      talentsDataObject: arrayToObj<Talent>(flatData as Talent[], 'id'),
+      loading: false,
+    })
   },
   selectTalent: (talent: Talent) =>
     set((state: TalentStore) => {
@@ -42,6 +54,13 @@ export const useTalentStore = create<TalentStore>((set) => ({
         }
       }
     }),
+  importTalents: (talents: number[]) => {
+    set(() => ({ selectedTalents: [] }))
+    return set((state: TalentStore) => {
+      return { selectedTalents: talents.map((t) => state.talentsDataObject[t]) }
+    })
+  },
+  resetTalents: () => (set: any) => set(() => ({ selectedTalents: [] })),
   selectedTalents: [],
   maxSelectedTalents: 6,
 }))
