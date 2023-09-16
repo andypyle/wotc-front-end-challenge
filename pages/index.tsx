@@ -23,12 +23,15 @@ export default function Home() {
     maxSelectedTalents,
   } = useTalentStore()
 
+  // We might have an api that takes race / class as an input and returns race / class specific talents, so
+  // lets mock one, for fun!
   useEffect(() => {
     fetchTalents()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (loading) return <h1>Loading Talents...</h1>
+  if (loading)
+    return <Heading className={lato.className}>Loading Talents...</Heading>
 
   return (
     <>

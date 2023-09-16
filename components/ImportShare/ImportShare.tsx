@@ -46,11 +46,12 @@ export const ImportShare = () => {
 
   const onClickImportLoadout = () => {
     if (importedLoadoutString.length) {
+      // Using a set to take care of duplicate ids.
       const importedLoadoutArray = Array.from(
         new Set(importedLoadoutString.split(','))
       ).map(Number)
 
-      // Can't import it if it's more than the talent points available.
+      // Shouldn't be able to import it if it's more than the talent points available.
       if (importedLoadoutArray.length <= maxSelectedTalents) {
         importTalents(importedLoadoutArray)
         setImportError('')
