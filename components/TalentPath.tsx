@@ -10,6 +10,14 @@ export type TalentPathProps = {
 export const TalentPathStyled = styled.div`
   display: flex;
   flex-direction: column;
+
+  &:not(:first-of-type) {
+    margin-top: 1rem;
+  }
+  @media only screen and (min-width: 999px) {
+    flex-direction: row;
+    flex: 1;
+  }
 `
 
 export const TalentPath: React.FC<TalentPathProps> = ({

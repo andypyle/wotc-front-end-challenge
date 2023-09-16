@@ -10,6 +10,7 @@ export const TalentButton = styled.button<TalentButtonProps>`
   border: 0;
   margin: 0;
   position: relative;
+  cursor: pointer;
   background-image: url('./talent-icons-sprite.png');
   background-repeat: no-repeat;
   width: 50px;
@@ -17,6 +18,14 @@ export const TalentButton = styled.button<TalentButtonProps>`
 
   background-position-x: ${({ bgPos = [0, 0] }) => bgPos[0]}px;
   background-position-y: ${({ bgPos = [0, 0] }) => bgPos[1]}px;
+
+  &:not(:disabled):hover {
+    background-position-y: ${({ bgPos = [0, 0] }) => bgPos[1] + 50}px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 
   &:after {
     display: block;

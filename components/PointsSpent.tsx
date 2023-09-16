@@ -5,10 +5,15 @@ export const PointsSpent = styled.div`
   font-size: 1.25rem;
   line-height: 1.25;
   flex-direction: column;
-  justify-contents: center;
+  justify-content: center;
   align-items: center;
   padding: 1.5rem;
+  margin-top: 1rem;
   background-color: var(--dark-gray);
+
+  @media only screen and (min-width: 999px) {
+    margin: 0;
+  }
 `
 
 export const PointsSpentText = styled.span`

@@ -14,8 +14,13 @@ export const globalStyles = (
 
       body {
         background-color: var(--dark-gray);
+        background-image: url('./talent-calc-bg.png');
         color: #eee;
         max-height: 100%;
+
+        & > div {
+          padding: 1rem;
+        }
       }
 
       html {

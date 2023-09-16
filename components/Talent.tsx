@@ -24,6 +24,11 @@ export const Talent: React.FC<TalentProps> = ({ talent, index }) => {
     [selectedTalents, talent]
   )
 
+  const selectedTalentsIds: number[] = useMemo(
+    () => selectedTalents.map((t) => t.id),
+    [selectedTalents]
+  )
+
   const onClickSelectTalent = () => selectTalent(talent)
 
   const onRightClickUnselectTalent = (
@@ -40,6 +45,9 @@ export const Talent: React.FC<TalentProps> = ({ talent, index }) => {
         selected={isSelected}
         onClick={onClickSelectTalent}
         onContextMenu={onRightClickUnselectTalent}
+        disabled={
+          !talent.requirements.every((req) => selectedTalentsIds.includes(req))
+        }
       />
       {index > 0 ? <Connector selected={isSelected} /> : null}
     </TalentStyled>

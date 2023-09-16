@@ -5,8 +5,12 @@ export const TalentPathName = styled.div`
   align-items: center;
   padding: 1.5rem;
 
+  @media only screen and (min-width: 999px) {
+    justify-content: center;
+  }
+
   & > h2 {
-    font-size: 1.4rem;
+    font-size: 1rem;
     font-weight: bolder;
     text-transform: uppercase;
   }

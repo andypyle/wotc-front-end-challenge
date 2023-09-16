@@ -1,5 +1,6 @@
 export { Connector } from './Connector'
 export { Container } from './Container'
+export { Heading } from './Heading'
 export { PointsSpent, PointsSpentText } from './PointsSpent'
 export { Talent } from './Talent'
 export { TalentButton } from './TalentButton'

@@ -1,5 +1,6 @@
 import {
   Container,
+  Heading,
   PointsSpent,
   PointsSpentText,
   TalentPath,
@@ -39,6 +40,9 @@ export default function Home() {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+      <Heading className={lato.className}>
+        TitanStar Legends - Rune Mastery Loadout Talent Calculator 9000
+      </Heading>
       <Container className={lato.className}>
         <TalentPaths>
           {Object.keys(talentsData).map((pathName: string) => (
