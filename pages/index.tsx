@@ -1,9 +1,9 @@
 import {
   Container,
   Heading,
+  ImportShare,
   PointsSpent,
   PointsSpentText,
-  ShareLoadout,
   TalentPath,
   TalentPaths,
 } from '@/components'
@@ -20,7 +20,6 @@ export default function Home() {
     talentsData,
     selectedTalents,
     loading,
-    selectTalent,
     maxSelectedTalents,
   } = useTalentStore()
 
@@ -61,7 +60,7 @@ export default function Home() {
           <PointsSpentText>Points Spent</PointsSpentText>
         </PointsSpent>
       </Container>
-      <ShareLoadout />
+      <ImportShare />
     </>
   )
 }

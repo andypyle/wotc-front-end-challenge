@@ -1,11 +1,14 @@
-export { Connector } from './Connector'
-export { Container } from './Container'
-export { Heading } from './Heading'
-export { PointsSpent, PointsSpentText } from './PointsSpent'
-export { ShareLoadout } from './ShareLoadout'
-export { Talent } from './Talent'
-export { TalentButton } from './TalentButton'
-export { TalentPath } from './TalentPath'
-export { TalentPathName } from './TalentPathName'
-export { TalentPaths } from './TalentPaths'
-export { Talents } from './Talents'
+export { ImportShare } from './ImportShare'
+export { Container, Heading } from './Layout'
+
+export {
+  Connector,
+  PointsSpent,
+  PointsSpentText,
+  Talent,
+  TalentButton,
+  TalentPath,
+  TalentPathName,
+  TalentPaths,
+  Talents,
+} from './Talents'
