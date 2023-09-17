@@ -24,6 +24,7 @@ for you to see.
 
 - NextJS
 - React
+- Zustand
 - TypeScript
 - Vercel
 - Emotion
