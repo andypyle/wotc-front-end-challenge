@@ -2,7 +2,7 @@ import type { Talent as TalentType } from '@/pages/api/talents'
 import { useTalentStore } from '@/stores/talents'
 import styled from '@emotion/styled'
 import { useMemo } from 'react'
-import { Connector, TalentButton } from '.'
+import { Connector, TalentButton } from '..'
 
 type TalentProps = {
   talent: TalentType

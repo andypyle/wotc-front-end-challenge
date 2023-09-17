@@ -1,6 +1,7 @@
 import {
   Container,
   Heading,
+  ImportShare,
   PointsSpent,
   PointsSpentText,
   TalentPath,
@@ -11,7 +12,7 @@ import { Lato } from 'next/font/google'
 import Head from 'next/head'
 import { useEffect } from 'react'
 
-const lato = Lato({ style: 'normal', weight: '400', subsets: ['latin'] })
+export const lato = Lato({ style: 'normal', weight: '400', subsets: ['latin'] })
 
 export default function Home() {
   const {
@@ -19,16 +20,18 @@ export default function Home() {
     talentsData,
     selectedTalents,
     loading,
-    selectTalent,
     maxSelectedTalents,
   } = useTalentStore()
 
+  // We might have an api that takes race / class as an input and returns race / class specific talents, so
+  // lets mock one, for fun!
   useEffect(() => {
     fetchTalents()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (loading) return <h1>Loading Talents...</h1>
+  if (loading)
+    return <Heading className={lato.className}>Loading Talents...</Heading>
 
   return (
     <>
@@ -60,6 +63,7 @@ export default function Home() {
           <PointsSpentText>Points Spent</PointsSpentText>
         </PointsSpent>
       </Container>
+      <ImportShare />
     </>
   )
 }
